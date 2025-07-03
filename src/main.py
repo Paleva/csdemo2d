@@ -1,9 +1,18 @@
 import sys
-from awpy import Demo, stats
+import polars as pl
+
+from printer.table import TablePrinter
+from awpy import Demo
+
+from parser.parser import Parser
 from match.round import Round
 from player.player import Player
 
 def main():
+
+    pl.Config.set_tbl_rows(40)
+    pl.Config.set_tbl_cols(100)
+
     if len(sys.argv) < 2:
         print("Usage: python main.py <argument>")
         sys.exit(1)
@@ -13,17 +22,23 @@ def main():
     demo = Demo(argument, verbose=True)
     demo.parse()
 
-    adr_all = stats.adr(demo.damages)
-    players = []
-    for player in adr_all.tail(10).iter_rows():
-        players.append(Player(player))
-    print(players)
+    parser = Parser(demo)
+    players = parser.parse_player_stats()
+    table = TablePrinter("Game stats")
+    table.print_table(
+        ["Username", "Damage", "ADR", "KAST", "Impact", "Rating"],
+        [str(player) for player in players]  
+    )
+ 
+
+  
 
     rounds = []
     for round in demo.rounds.iter_rows():
         rounds.append(Round(round))
 
-    # print(rounds)
+    
+
 
 
 
