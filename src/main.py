@@ -5,8 +5,7 @@ from printer.table import TablePrinter
 from awpy import Demo
 
 from parser.parser import Parser
-from match.round import Round
-from player.player import Player
+from match.match import Match
 
 def main():
 
@@ -30,12 +29,10 @@ def main():
         [str(player) for player in players]  
     )
  
-
+    match = Match(demo)
+    print(match.rounds)
   
 
-    rounds = []
-    for round in demo.rounds.iter_rows():
-        rounds.append(Round(round))
 
     
 
