@@ -31,11 +31,11 @@ def main():
         [str(player) for player in players]  
     )
 
-    # print(demo)
-    parsed_teams = demo.ticks.filter(pl.col("round_num") <= 12).group_by(["side", "name"]).all().get_columns()[:2]
-    print(parsed_teams)
 
-    # teams = parser.parse_teams()
+
+    
+    teams = parser.parse_teams(players)
+    print(teams)
     # table.print_table(
     #     ["Team 1", "Team2"],
     #     [str(team) for team in teams]

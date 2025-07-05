@@ -36,11 +36,16 @@ class Parser():
 
         return players
     
-    def parse_teams(self):
+    def parse_teams(self, players: list[Player]) -> list[Team]:
         teams: list[Team] = []
-        parsed_teams = self.parsed_demo.ticks.filter(pl.col("round_num") <= 12).group_by(["side", "name"]).all().get_columns()
-        
-        return teams
+        teams = self.parsed_demo.ticks.filter(pl.col("round_num") <= 12).group_by(["side", "name"]).all().select(["name", "side"])
+        team_t = teams.filter(pl.col("side") == "t").select("name").to_series()
+        team_ct = teams.filter(pl.col("side") == "ct").select("name").to_series()
+
+        team1 = [player for player in players if player.username in team_t]
+        team2 = [player for player in players if player.username in team_ct]
+
+        return [Team(team1), Team(team2)]
     
 
         
