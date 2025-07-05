@@ -2,6 +2,7 @@ import polars as pl
 
 from awpy import Demo, stats
 from player.player import Player
+from match.team import Team
 
 class Parser():
     def __init__(self, parsed_demo: Demo):
@@ -34,6 +35,12 @@ class Parser():
             players.append(Player(username, damage, adr, kills, assists, deaths, kst, impact, rating))
 
         return players
+    
+    def parse_teams(self):
+        teams: list[Team] = []
+        parsed_teams = self.parsed_demo.ticks.filter(pl.col("round_num") <= 12).group_by(["side", "name"]).all().get_columns()
+        
+        return teams
     
 
         

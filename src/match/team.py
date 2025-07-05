@@ -9,4 +9,11 @@ class Team():
     """
     def __init__(self, players: list[Player]):
         self.players = players
+
+    def __repr__(self):
+        usernames: str = ""
+        for username in self.players:
+            usernames += f"{username.username} "
+        print(usernames)
+        return usernames.strip()
     

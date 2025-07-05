@@ -1,6 +1,7 @@
 from awpy import Demo
 from match.round import Round
 from player.player import Player
+from match.team import Team
 
 class Match():
     """
@@ -9,10 +10,11 @@ class Match():
         parsed_demo (Demo): The parsed demo object containing match data.
         players (list[Player]): A list of Player objects representing the players in the match.
     """
-    def __init__(self, parsed_demo: Demo, players: list[Player]):
+    def __init__(self, parsed_demo: Demo, players: list[Player], teams: list[Team] = None):
         self.map = parsed_demo.header["map_name"]
         self.rounds = self._parse_rounds(parsed_demo)
         self.players = players
+        self.teams = teams
 
     def _parse_rounds(self, parsed_demo):
         rounds = []

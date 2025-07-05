@@ -6,13 +6,16 @@ class TablePrinter():
     def __init__(self, title: str = ""):
         self._table = Table(title=title)
         self._console = Console()
+        self._title = title
 
     def print_table(self, columns: list[str], rows: list[str]):
         """
         Args:
             columns (list[str]): List of column headers.
             rows (list[str]): List of rows, where each row is a string with values separated by spaces.
-        """ 
+        """
+        self._table = Table(title=self._title)
+
         for column in columns:
             self._table.add_column(*column.split(" "))
         

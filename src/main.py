@@ -1,6 +1,8 @@
 import sys
 import polars as pl
 
+from demoparser2 import DemoParser
+
 from printer.table import TablePrinter
 from awpy import Demo
 
@@ -28,7 +30,16 @@ def main():
         ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
         [str(player) for player in players]  
     )
-    
+
+    # print(demo)
+    parsed_teams = demo.ticks.filter(pl.col("round_num") <= 12).group_by(["side", "name"]).all().get_columns()[:2]
+    print(parsed_teams)
+
+    # teams = parser.parse_teams()
+    # table.print_table(
+    #     ["Team 1", "Team2"],
+    #     [str(team) for team in teams]
+    # )
     match = Match(demo, players)
 
 if __name__ == "__main__":
