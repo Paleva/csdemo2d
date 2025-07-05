@@ -22,16 +22,13 @@ def main():
     demo.parse()
 
     parser = Parser(demo)
-    # players = parser.parse_player_stats()
-    # table = TablePrinter("Game stats")
-    # table.print_table(
-    #     ["Username", "Damage", "ADR", "KAST", "Impact", "Rating"],
-    #     [str(player) for player in players]  
-    # )
- 
-    # match = Match(demo)
-    # print(match.rounds)
-    print(demo.kills.group_by("attacker_name").len().sort("attacker_name"))
+    players = parser.parse_player_stats()
+    table = TablePrinter("Game stats")
+    table.print_table(
+        ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
+        [str(player) for player in players]  
+    )
+    
 
   
 
