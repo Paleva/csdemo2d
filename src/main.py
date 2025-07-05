@@ -35,11 +35,6 @@ def main():
 
     
     teams = parser.parse_teams(players)
-    print(teams)
-    # table.print_table(
-    #     ["Team 1", "Team2"],
-    #     [str(team) for team in teams]
-    # )
     match = Match(demo, players)
 
 if __name__ == "__main__":

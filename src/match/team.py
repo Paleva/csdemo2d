@@ -14,6 +14,5 @@ class Team():
         usernames: str = ""
         for username in self.players:
             usernames += f"{username.username} "
-        print(usernames)
         return usernames.strip()
     
