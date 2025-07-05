@@ -29,14 +29,7 @@ def main():
         [str(player) for player in players]  
     )
     
-
-  
-
-
-    
-
-
-
+    match = Match(demo, players)
 
 if __name__ == "__main__":
     main()

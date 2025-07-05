@@ -8,6 +8,9 @@ class Parser():
         self.parsed_demo = parsed_demo
 
     def parse_player_stats(self) -> list[Player]:
+        """
+        Returns a list with Player objects for each player containing the basic stats for them
+        """
         players_adr = stats.adr(self.parsed_demo).tail(10).sort("name") # All round data is in the tail
         players_kast = stats.kast(self.parsed_demo, 5).head(10).sort("name") # All round data is in the head 
         players_rating = stats.rating(self.parsed_demo).head(10).sort("name")
