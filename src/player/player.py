@@ -1,8 +1,11 @@
 
 class Player():
-    def __init__(self, stats, kast, impact, rating):
+    def __init__(self, kills, assists, deaths, stats, kast, impact, rating):
         self.username = stats[0]
         self.damage = stats[4]
+        self.kills = kills
+        self.assists = assists
+        self.deaths = deaths
         self.adr = round(stats[5], 1)
         self.kast = round(kast)
         self.impact = round(impact, 2)

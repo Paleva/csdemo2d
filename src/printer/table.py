@@ -9,8 +9,9 @@ class TablePrinter():
 
     def print_table(self, columns: list[str], rows: list[str]):
         """
-        rows: List of strings that contain the rows information seperated by spaces
-        columns: List of column string names
+        Args:
+            columns (list[str]): List of column headers.
+            rows (list[str]): List of rows, where each row is a string with values separated by spaces.
         """ 
         for column in columns:
             self._table.add_column(*column.split(" "))
