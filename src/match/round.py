@@ -1,6 +1,19 @@
 from awpy import Demo
 
 class Round():
+    """
+    Represents a round in a CS:GO match.
+    Args:
+        round (tuple): A tuple containing round data:
+            - round_num (int): The round number.
+            - start_tick (int): The tick when the round started.
+            - freeze_time_end_tick (int): The tick when the freeze time ended.
+            - end_tick (int): The tick when the round ended.
+            - round_winner (str): The team that won the round.
+            - winner_reason (str): The reason the round_winner won.
+            - bomb_plant (int or None): The tick when the bomb was planted, or None if not planted.
+            - bombsite (str): The bombsite where it was planted, if applicable.
+    """
     def __init__(self, round: tuple):
         self.round_num =  round[0]
         self.start_tick = round[1]
