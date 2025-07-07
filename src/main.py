@@ -28,7 +28,11 @@ def main():
         ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
         [str(player) for player in players]  
     )
+
+
+
     
+    teams = parser.parse_teams(players)
     match = Match(demo, players)
 
 if __name__ == "__main__":
