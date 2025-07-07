@@ -1,8 +1,6 @@
 import sys
 import polars as pl
 
-from demoparser2 import DemoParser
-
 from printer.table import TablePrinter
 from awpy import Demo
 

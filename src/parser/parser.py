@@ -45,6 +45,9 @@ class Parser():
         team1 = [player for player in players if player.username in team_t]
         team2 = [player for player in players if player.username in team_ct]
 
+        if len(team1) + len(team2) != len(players):
+            raise ValueError("Not all players could be assigned to teams")
+
         return [Team(team1), Team(team2)]
     
 
