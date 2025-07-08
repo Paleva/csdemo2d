@@ -26,26 +26,16 @@ class Parser():
             dmg_adr = players_adr.row(by_predicate=(pl.col("name") == username)) # 4 index is dmg 5 is adr
             kast = players_kast.row(by_predicate=(pl.col("name") == username)) # 5 index is KAST
             ratings = players_rating.row(by_predicate=(pl.col("name") == username)) # 4 index is impact 5 is rating
-            try:
-                kills = players_kills.row(by_predicate=(pl.col("attacker_name") == username))
-                kill_count = kills[1]
-            except pl.exceptions.NoRowsReturnedError:
-                kill_count = 0
-            try:
-                assists = players_assists.row(by_predicate=(pl.col("assister_name") == username))
-                assist_count = assists[1]
-            except pl.exceptions.NoRowsReturnedError:
-                assist_count = 0
-            try:
-                deaths = players_deaths.row(by_predicate=(pl.col("victim_name") == username))
-                death_count = deaths[1]
-            except pl.exceptions.NoRowsReturnedError:
-                death_count = 0
+            kill_count = self._get_stat_count(players_kills, "attacker_name", username)
+            assist_count = self._get_stat_count(players_assists, "assister_name", username)
+            death_count = self._get_stat_count(players_deaths, "victim_name", username)
+            
             dmg = dmg_adr[4] if len(dmg_adr) > 0 else 0
             adr = dmg_adr[5] if len(dmg_adr) > 0 else 0
             kast_value = kast[5] if len(kast) > 0 else 0
             impact = ratings[4] if len(ratings) > 0 else 0
             rating = ratings[5] if len(ratings) > 0 else 0
+            
             players.append(Player(username, dmg, adr, kill_count, assist_count, death_count, kast_value, impact, rating))
         return players
     
@@ -64,4 +54,9 @@ class Parser():
         return [Team(team1), Team(team2)]
     
 
-        
+    def _get_stat_count(self, data, column_name, username):
+        try:
+            row = data.row(by_predicate=(pl.col(column_name) == username))
+            return row[1]
+        except pl.exceptions.NoRowsReturnedError:
+            return 0
