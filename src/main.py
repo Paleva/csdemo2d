@@ -22,17 +22,22 @@ def main():
     demo.parse()
 
     parser = Parser(demo)
+
     players = parser.parse_player_stats()
+    teams = parser.parse_teams(players)
+
     table = TablePrinter("Game stats")
     table.print_table(
         ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
-        [str(player) for player in players]  
+        [str(player) for player in teams[0].players]  
+    )
+    table.print_table(
+        ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
+        [str(player) for player in teams[1].players]  
     )
 
 
-
     
-    teams = parser.parse_teams(players)
     match = Match(demo, players)
 
 if __name__ == "__main__":
