@@ -54,7 +54,7 @@ class Parser():
         return [Team(team1), Team(team2)]
     
 
-    def _get_stat_count(self, data, column_name, username):
+    def _get_stat_count(self, data: pl.DataFrame, column_name: str, username: str):
         try:
             row = data.row(by_predicate=(pl.col(column_name) == username))
             return row[1]
