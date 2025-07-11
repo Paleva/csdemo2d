@@ -26,11 +26,12 @@ def main():
     players = parser.parse_player_stats()
     teams = parser.parse_teams(players)
 
-    table = TablePrinter("Game stats")
+    table = TablePrinter("Team 1")
     table.print_table(
         ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
         [str(player) for player in teams[0].players]  
     )
+    table.title = "Team 2"
     table.print_table(
         ["Username", "Kills", "Deaths", "Assists", "Damage", "ADR", "KAST", "Impact", "Rating"],
         [str(player) for player in teams[1].players]  
